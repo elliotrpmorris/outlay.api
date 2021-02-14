@@ -70,6 +70,7 @@ namespace Outlay.API
             services.AddScoped<UserDataLoader>();
 
             services.AddScoped<UserType>();
+            services.AddScoped<BudgetType>();
 
             return services;
         }

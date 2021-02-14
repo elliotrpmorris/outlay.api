@@ -7,9 +7,12 @@ namespace Outlay.Infrastructure
     using Chest.Core.Logging;
     using global::Marten;
     using Microsoft.Extensions.DependencyInjection;
+    using Outlay.Domain.Data.Budget;
     using Outlay.Domain.Data.User;
+    using Outlay.Infrastructure.Document.Budget;
     using Outlay.Infrastructure.Document.User;
     using Outlay.Infrastructure.Marten;
+    using Outlay.Infrastructure.Marten.Seed;
 
     /// <summary>
     /// Service Extensions.
@@ -51,16 +54,27 @@ namespace Outlay.Infrastructure
                        // Schema setup.
                        _.Schema.For<UserDocument>()
                             .Identity(i => i.Id)
-                            .DocumentAlias("users");
+                            .DocumentAlias("user");
 
-                           // Budget Varients.
-                           //.AddSubClass(typeof(BioSectionDocument))
-                           //.AddSubClass(typeof(ContactSectionDocument))        
+                       _.Schema.For<BudgetDocument>()
+                            .Identity(i => i.Id)
+                            .DocumentAlias("budget");
+
+                       // Seed data, TODO: Remove me after init build.
+                       _.InitialData.Add(new SeedDataSetup(SeedData.UserDocuments));
+                       _.InitialData.Add(new SeedDataSetup(SeedData.BudgetDocument));
+
+                       // Budget Varients.
+                       //.AddSubClass(typeof(BioSectionDocument))
+                       //.AddSubClass(typeof(ContactSectionDocument))        
                    }));
 
             services
                 .AddTransient<IUserReader, MartenUserStore>()
                 .AddTransient<IUserWriter, MartenUserStore>();
+
+            services
+               .AddTransient<IBudgetReader<Budget>, MartenBudgetStore>();
 
             return services;
         }

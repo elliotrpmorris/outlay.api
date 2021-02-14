@@ -8,7 +8,6 @@
     <Folder Include="Data\" />
     <Folder Include="Data\User\" />
     <Folder Include="Data\Budget\" />
-    <Folder Include="Data\UserBudget\" />
     <Folder Include="Command\" />
     <Folder Include="Command\User\" />
     <Folder Include="Command\Budget\" />

@@ -33,6 +33,7 @@
 
     <ItemGroup>
       <Folder Include="Controllers\Query\UserRoot\Types\" />
+      <Folder Include="Controllers\Query\UserRoot\BudgetRoot\" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\Chest.Core\Chest.Core.csproj">

@@ -11,7 +11,7 @@ namespace Outlay.Domain.Command.User.Create
     /// Create User Command.
     /// </summary>
     [CommandName("USER/CREATE")]
-    public class CreateUser
+    public class CreateUser : ICommand
     {
         public CreateUser(Guid id)
         {

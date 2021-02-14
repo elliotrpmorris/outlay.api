@@ -1,0 +1,11 @@
+{
+    "Id": "39498-4234-234-546-6446",
+    "Items": {
+        "Food": 50,
+        "Fuel": 120,
+    }
+    "AlternativeItems": {
+        "Food": 30, 
+        "Fuel": 80
+    }
+}

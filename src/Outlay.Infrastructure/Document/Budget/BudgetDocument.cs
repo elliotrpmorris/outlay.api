@@ -1,21 +1,21 @@
-﻿// <copyright file="Budget.cs" company="PlaceholderCompany">
+﻿// <copyright file="BudgetDocument.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Outlay.Domain.Data.Budget
+namespace Outlay.Infrastructure.Document.Budget
 {
     using System;
     using System.Collections.Generic;
 
     /// <summary>
-    /// Budget.
+    /// Budget Document.
     /// </summary>
-    public class Budget
+    public class BudgetDocument
     {
-        public Budget(
-            Guid id,
-            Guid userId,
-            IDictionary<string, double> items)
+        public BudgetDocument(
+           Guid id,
+           Guid userId,
+           IDictionary<string, double> items)
         {
             this.Id = id;
             this.UserId = userId;
