@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Marten" Version="3.13.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Marten\" />
+    <Folder Include="Document\" />
+    <Folder Include="Document\User\" />
+    <Folder Include="Marten\Seed\" />
+    <Folder Include="Document\Budget\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Outlay.Domain\Outlay.Domain.csproj" />
+  </ItemGroup>
+</Project>
