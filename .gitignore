@@ -348,6 +348,7 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Custom 
 .DS_Store
-.idea/.idea.outlay.api.dir/.idea/.idea.outlay.api.dir.iml
 .idea/*
