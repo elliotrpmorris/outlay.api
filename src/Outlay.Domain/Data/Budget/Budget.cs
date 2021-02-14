@@ -15,17 +15,17 @@ namespace Outlay.Domain.Data.Budget
         public Budget(
             Guid id,
             IDictionary<string, decimal> items,
-            BudgetType budgetType)
+            BudgetVarient budgetVarient)
         {
             this.Id = id;
             this.Items = items;
-            this.BudgetType = budgetType;
+            this.BudgetVarient = budgetVarient;
         }
 
         public Guid Id { get; }
 
         public IDictionary<string, decimal> Items { get; }
 
-        public BudgetType BudgetType { get; }
+        public BudgetVarient BudgetVarient { get; }
     }
 }

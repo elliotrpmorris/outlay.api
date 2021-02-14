@@ -9,9 +9,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Marten" Version="3.13.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Marten\" />
-    <Folder Include="Memory\" />
+    <Folder Include="Document\" />
+    <Folder Include="Document\User\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Outlay.Domain\Outlay.Domain.csproj" />
   </ItemGroup>
 </Project>
