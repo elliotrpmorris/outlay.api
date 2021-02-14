@@ -9,6 +9,7 @@
     <Folder Include="Data\User\" />
     <Folder Include="Data\Budget\" />
     <Folder Include="Data\UserBudget\" />
+    <Folder Include="Command\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
