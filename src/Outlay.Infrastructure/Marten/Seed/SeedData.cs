@@ -7,6 +7,7 @@ namespace Outlay.Infrastructure.Marten.Seed
     using System;
     using System.Collections.Generic;
     using Outlay.Infrastructure.Document.Budget;
+    using Outlay.Infrastructure.Document.ConceptBudget;
     using Outlay.Infrastructure.Document.User;
 
     /// <summary>
@@ -39,6 +40,24 @@ namespace Outlay.Infrastructure.Marten.Seed
                     { "Food", 25 },
                     { "Netflix", 8.99 },
                 }),
+        };
+
+        /// <summary>
+        /// Seed data for concept budget documents.
+        /// </summary>
+        public static readonly ConceptBudgetDocument[]
+            ConceptBudgetDocument =
+        {
+            new ConceptBudgetDocument(
+                Guid.Parse("c5272b61-5692-4a8a-b99c-ad4e631c337c"),
+                Guid.Parse("3f169b60-3d10-4beb-b6f9-3bfe2e4e5526"),
+                new Dictionary<string, double>()
+                {
+                    { "Fuel", 40 },
+                    { "Food", 25 },
+                    { "Netflix", 8.99 },
+                },
+                "My concept"),
         };
     }
 }

@@ -10,6 +10,7 @@ namespace Outlay.Infrastructure
     using Outlay.Domain.Data.Budget;
     using Outlay.Domain.Data.User;
     using Outlay.Infrastructure.Document.Budget;
+    using Outlay.Infrastructure.Document.ConceptBudget;
     using Outlay.Infrastructure.Document.User;
     using Outlay.Infrastructure.Marten;
     using Outlay.Infrastructure.Marten.Seed;
@@ -58,15 +59,13 @@ namespace Outlay.Infrastructure
 
                        _.Schema.For<BudgetDocument>()
                             .Identity(i => i.Id)
-                            .DocumentAlias("budget");
+                            .DocumentAlias("budget")
+                            .AddSubClass(typeof(ConceptBudgetDocument));
 
                        // Seed data, TODO: Remove me after init build.
                        _.InitialData.Add(new SeedDataSetup(SeedData.UserDocuments));
                        _.InitialData.Add(new SeedDataSetup(SeedData.BudgetDocument));
-
-                       // Budget Varients.
-                       //.AddSubClass(typeof(BioSectionDocument))
-                       //.AddSubClass(typeof(ContactSectionDocument))        
+                       _.InitialData.Add(new SeedDataSetup(SeedData.ConceptBudgetDocument));
                    }));
 
             services
@@ -74,7 +73,8 @@ namespace Outlay.Infrastructure
                 .AddTransient<IUserWriter, MartenUserStore>();
 
             services
-               .AddTransient<IBudgetReader<Budget>, MartenBudgetStore>();
+               .AddTransient<IBudgetReader<Budget>, MartenBudgetStore>()
+               .AddTransient<IConceptBudgetReader<ConceptBudget>, MartenConceptBudgetStore>();
 
             return services;
         }
