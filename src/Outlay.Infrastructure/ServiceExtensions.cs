@@ -2,16 +2,15 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-using Chest.Core.Logging;
-using Marten;
-using Microsoft.Extensions.DependencyInjection;
-using Outlay.Domain.Data.User;
-using Outlay.Infrastructure.Document;
-using Outlay.Infrastructure.Document.User;
-using Outlay.Infrastructure.Marten;
-
 namespace Outlay.Infrastructure
 {
+    using Chest.Core.Logging;
+    using global::Marten;
+    using Microsoft.Extensions.DependencyInjection;
+    using Outlay.Domain.Data.User;
+    using Outlay.Infrastructure.Document.User;
+    using Outlay.Infrastructure.Marten;
+
     /// <summary>
     /// Service Extensions.
     /// </summary>

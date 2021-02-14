@@ -2,7 +2,7 @@
 // Copyright (c) Outlay. All rights reserved.
 // </copyright>
 
-namespace CurriculumVitaeBuilder.Api.Controllers.Query.DataLoaders
+namespace Outlay.Api.Controllers.Query.DataLoaders
 {
     using System;
     using System.Linq;

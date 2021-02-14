@@ -17,15 +17,25 @@ namespace Outlay.API
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
     using Microsoft.OpenApi.Models;
+    using Outlay.Infrastructure;
 
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="config">The configuration provider.</param>
+        public Startup(IConfiguration config)
         {
-            this.Configuration = configuration;
+            if (config == null)
+            {
+                throw new ArgumentNullException(nameof(config));
+            }
+
+            this.ConnectionString = config.GetConnectionString("Postgres");
         }
 
-        public IConfiguration Configuration { get; }
+        private string ConnectionString { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -42,11 +52,11 @@ namespace Outlay.API
 
             services.AddHealthChecks();
 
-            //services.AddMartenDataAccess(this.ConnectionString);
+            services.AddMartenDataAccess(this.ConnectionString);
 
-            //services.RegisterCommandPipeline();
+            services.RegisterCommandPipeline();
 
-            //services.RegisterGraphQL();
+            services.RegisterGraphQL();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

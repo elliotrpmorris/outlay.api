@@ -2,7 +2,7 @@
 // Copyright (c) Outlay. All rights reserved.
 // </copyright>
 
-namespace CurriculumVitaeBuilder.Api.Controllers.Query
+namespace Outlay.Api.Controllers.Query
 {
     using GraphQL;
     using GraphQL.Types;
