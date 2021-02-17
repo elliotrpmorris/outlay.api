@@ -15,7 +15,7 @@ namespace Outlay.Infrastructure.Marten
     /// Marten Budget Store.
     /// </summary>
     internal sealed class MartenConceptBudgetStore :
-        IConceptBudgetReader<ConceptBudget>
+        IConceptBudgetReader
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MartenConceptBudgetStore"/> class.
@@ -30,15 +30,14 @@ namespace Outlay.Infrastructure.Marten
 
         private IDocumentStore DocumentStore { get; }
 
-        /// <inheritdoc/>
-        public async Task<ConceptBudget> GetConceptBudgetByIdAsync(Guid id)
+        public async Task<ConceptBudget> GetBudgetByIdAsync(Guid budgetId)
         {
             using var session = this.DocumentStore.LightweightSession();
 
             var budget = await
                 session
                     .Query<ConceptBudgetDocument>()
-                    .FirstOrDefaultAsync(b => b.Id == id);
+                    .FirstOrDefaultAsync(b => b.Id == budgetId);
 
             if (budget == null)
             {
@@ -46,6 +45,11 @@ namespace Outlay.Infrastructure.Marten
             }
 
             return budget.ToConceptBudget();
+        }
+
+        public Task<bool> GetBudgetExistsAsync(Guid budgetId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

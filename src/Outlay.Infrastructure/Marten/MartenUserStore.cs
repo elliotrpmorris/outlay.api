@@ -30,6 +30,16 @@ namespace Outlay.Infrastructure.Marten
 
         private IDocumentStore DocumentStore { get; }
 
+        public Task AddAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <inheritdoc/>
         public async Task<User?> GetUserByIdAsync(Guid userId)
         {
@@ -46,6 +56,11 @@ namespace Outlay.Infrastructure.Marten
             }
 
             return user.ToUser();
+        }
+
+        public Task<bool> GetUserExistsAsync(Guid userId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

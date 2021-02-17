@@ -11,12 +11,12 @@ namespace Outlay.API.Controllers.Query.UserRoot.ConceptBudgetRoot
     public class ConceptBudgetQuery : ObjectGraphType<ConceptBudgetQueryContext>
     {
         public ConceptBudgetQuery(
-            IConceptBudgetReader<ConceptBudget> conceptBudgetReader)
+            IConceptBudgetReader conceptBudgetReader)
         {
             this.Field<ConceptBudgetType, ConceptBudget?>()
                 .Name("info")
                 .Description("Concept budget information")
-                .ResolveAsync(context => conceptBudgetReader.GetConceptBudgetByIdAsync(
+                .ResolveAsync(context => conceptBudgetReader.GetBudgetByIdAsync(
                     context.Source.BudgetId));
         }
     }

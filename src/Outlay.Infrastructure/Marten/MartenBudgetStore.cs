@@ -14,7 +14,8 @@ namespace Outlay.Infrastructure.Marten
     /// Marten Budget Store.
     /// </summary>
     internal sealed class MartenBudgetStore :
-        IBudgetReader<Budget>
+        IBudgetReader,
+        IBudgetWriter
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MartenBudgetStore"/> class.
@@ -28,6 +29,21 @@ namespace Outlay.Infrastructure.Marten
         }
 
         private IDocumentStore DocumentStore { get; }
+
+        public Task AddAsync(Budget user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(Budget budget)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Budget> GetBudgetByIdAsync(Guid budgetId)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <inheritdoc/>
         public async Task<Budget?> GetBudgetByUserIdAsync(Guid userId)
@@ -45,6 +61,21 @@ namespace Outlay.Infrastructure.Marten
             }
 
             return budget.ToBudget();
+        }
+
+        public Task<bool> GetBudgetExistsAsync(Guid budgetId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> GetBudgetForUserExistsAsync(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(Budget budget)
+        {
+            throw new NotImplementedException();
         }
     }
 }

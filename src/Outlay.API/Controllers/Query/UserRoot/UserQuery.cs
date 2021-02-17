@@ -15,7 +15,7 @@ namespace Outlay.API.Controllers.Query.UserRoot
     {
         public UserQuery(
             IUserReader userReader,
-            IBudgetReader<Budget> budgetReader)
+            IBudgetReader budgetReader)
         {
             this.Field<UserType, User?>()
                 .Name("info")

@@ -7,9 +7,21 @@ namespace Outlay.Domain.Data.Budget
     using System;
     using System.Threading.Tasks;
 
-    public interface IBudgetReader<T>
-        where T : Budget
+    /// <summary>
+    /// Budget Reader.
+    /// </summary>
+    public interface IBudgetReader : IBudgetBaseReader<Budget>
     {
-        public Task<T?> GetBudgetByUserIdAsync(Guid id);
+        public Task<Budget?> GetBudgetByUserIdAsync(Guid id);
+
+        /// <summary>
+        /// Checks if a budget exists or not by a user id.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>Whether the budget exists or not.</returns>
+        /// <remarks>
+        /// A user can only have one normal budget this is used to enforce that.
+        /// </remarks>
+        public Task<bool> GetBudgetForUserExistsAsync(Guid userId);
     }
 }

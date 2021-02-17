@@ -73,8 +73,11 @@ namespace Outlay.Infrastructure
                 .AddTransient<IUserWriter, MartenUserStore>();
 
             services
-               .AddTransient<IBudgetReader<Budget>, MartenBudgetStore>()
-               .AddTransient<IConceptBudgetReader<ConceptBudget>, MartenConceptBudgetStore>();
+               .AddTransient<IBudgetReader, MartenBudgetStore>()
+               .AddTransient<IBudgetWriter, MartenBudgetStore>();
+
+            services
+               .AddTransient<IConceptBudgetReader, MartenConceptBudgetStore>();
 
             return services;
         }

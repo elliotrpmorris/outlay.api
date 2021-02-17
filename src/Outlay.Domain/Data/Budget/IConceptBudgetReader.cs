@@ -7,9 +7,7 @@ namespace Outlay.Domain.Data.Budget
     using System;
     using System.Threading.Tasks;
 
-    public interface IConceptBudgetReader<T>
-        where T : Budget
+    public interface IConceptBudgetReader : IBudgetBaseReader<ConceptBudget>
     {
-        public Task<T?> GetConceptBudgetByIdAsync(Guid id);
     }
 }
