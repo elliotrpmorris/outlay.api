@@ -11,7 +11,7 @@ namespace Outlay.Domain.Command.Budget.Create
     /// <summary>
     /// Create Budget Command.
     /// </summary>
-    [CommandName("CREATE/UPDATE")]
+    [CommandName("BUDGET/CREATE")]
     public class CreateBudget : ICommand
     {
         public CreateBudget(

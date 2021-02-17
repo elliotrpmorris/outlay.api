@@ -13,7 +13,7 @@ namespace Outlay.Domain.Data.Budget
         /// </summary>
         /// <param name="budget">The budget.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public Task AddAsync(Budget user);
+        public Task AddAsync(Budget budget);
 
         /// <summary>
         /// Updates the budget.

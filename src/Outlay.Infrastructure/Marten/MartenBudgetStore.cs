@@ -5,7 +5,10 @@
 namespace Outlay.Infrastructure.Marten
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
+    using Chest.Core.Logging;
     using global::Marten;
     using Outlay.Domain.Data.Budget;
     using Outlay.Infrastructure.Document.Budget;
@@ -30,16 +33,27 @@ namespace Outlay.Infrastructure.Marten
 
         private IDocumentStore DocumentStore { get; }
 
-        public Task AddAsync(Budget user)
+        /// <inheritdoc/>
+        public async Task AddAsync(Budget budget)
         {
-            throw new NotImplementedException();
+            using var session = this.DocumentStore.LightweightSession();
+
+            session.Store(budget.ToBudgetDocument());
+
+            await session.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(Budget budget)
+        /// <inheritdoc/>
+        public async Task DeleteAsync(Budget budget)
         {
-            throw new NotImplementedException();
+            using var session = this.DocumentStore.LightweightSession();
+
+            session.Delete(budget.ToBudgetDocument());
+
+            await session.SaveChangesAsync();
         }
 
+        /// <inheritdoc/>
         public Task<Budget> GetBudgetByIdAsync(Guid budgetId)
         {
             throw new NotImplementedException();
@@ -63,19 +77,73 @@ namespace Outlay.Infrastructure.Marten
             return budget.ToBudget();
         }
 
-        public Task<bool> GetBudgetExistsAsync(Guid budgetId)
+        /// <inheritdoc/>
+        public async Task<bool> GetBudgetExistsAsync(Guid budgetId)
         {
-            throw new NotImplementedException();
+            using var session = this.DocumentStore.LightweightSession();
+
+            var exists = await
+                session
+                    .Query<BudgetDocument>()
+                    .AnyAsync(b => b.Id == budgetId);
+
+            return exists;
         }
 
-        public Task<bool> GetBudgetForUserExistsAsync(Guid userId)
+        /// <inheritdoc/>
+        public async Task<bool> GetBudgetForUserExistsAsync(Guid userId)
         {
-            throw new NotImplementedException();
+            using var session = this.DocumentStore.LightweightSession();
+
+            var exists = await
+                session
+                    .Query<BudgetDocument>()
+                    .AnyAsync(b => b.UserId == userId);
+
+            return exists;
         }
 
-        public Task UpdateAsync(Budget budget)
+        /// <inheritdoc/>
+        public async Task UpdateAsync(Budget budget)
         {
-            throw new NotImplementedException();
+            using var session = this.DocumentStore.LightweightSession();
+
+            var budgetToUpdate = await
+                session
+                    .Query<BudgetDocument>()
+                    .FirstOrDefaultAsync(s => s.Id == budget.Id);
+
+            if (budget == null)
+            {
+                Logger.LogInformation($"Budget with Identifer: {budget.Id} doesn't exist");
+
+                return;
+            }
+
+            // TODO: Extract me into a helper plz.
+            foreach (var item in budgetToUpdate.Items)
+            {
+                var existingItems =
+                    budgetToUpdate.Items
+                        .FirstOrDefault(c =>
+                            c.Key.ToLower() == item.Key.ToLower());
+
+                // Item exists but has updated value.
+                if (existingItems.Key != null)
+                {
+                    // Update item's value.
+                    budgetToUpdate.Items[existingItems.Key] = item.Value;
+                }
+                else
+                {
+                    // New contact detail so add to items.
+                    budgetToUpdate.Items.TryAdd(item.Key.ToLower(), item.Value);
+                }
+            }
+
+            session.Update(budgetToUpdate);
+
+            await session.SaveChangesAsync();
         }
     }
 }

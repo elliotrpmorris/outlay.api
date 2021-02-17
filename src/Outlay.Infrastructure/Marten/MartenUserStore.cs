@@ -30,14 +30,24 @@ namespace Outlay.Infrastructure.Marten
 
         private IDocumentStore DocumentStore { get; }
 
-        public Task AddAsync(User user)
+        /// <inheritdoc/>
+        public async Task AddAsync(User user)
         {
-            throw new NotImplementedException();
+            using var session = this.DocumentStore.LightweightSession();
+
+            session.Store(user.ToUserDocument());
+
+            await session.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(User user)
+        /// <inheritdoc/>
+        public async Task DeleteAsync(User user)
         {
-            throw new NotImplementedException();
+            using var session = this.DocumentStore.LightweightSession();
+
+            session.Delete(user.ToUserDocument());
+
+            await session.SaveChangesAsync();
         }
 
         /// <inheritdoc/>
@@ -58,9 +68,17 @@ namespace Outlay.Infrastructure.Marten
             return user.ToUser();
         }
 
-        public Task<bool> GetUserExistsAsync(Guid userId)
+        /// <inheritdoc/>
+        public async Task<bool> GetUserExistsAsync(Guid userId)
         {
-            throw new NotImplementedException();
+            using var session = this.DocumentStore.LightweightSession();
+
+            var exists = await
+                session
+                    .Query<UserDocument>()
+                    .AnyAsync(s => s.Id == userId);
+
+            return exists;
         }
     }
 }

@@ -30,6 +30,7 @@ namespace Outlay.Infrastructure.Marten
 
         private IDocumentStore DocumentStore { get; }
 
+        /// <inheritdoc/>
         public async Task<ConceptBudget> GetBudgetByIdAsync(Guid budgetId)
         {
             using var session = this.DocumentStore.LightweightSession();
@@ -47,9 +48,17 @@ namespace Outlay.Infrastructure.Marten
             return budget.ToConceptBudget();
         }
 
-        public Task<bool> GetBudgetExistsAsync(Guid budgetId)
+        /// <inheritdoc/>
+        public async Task<bool> GetBudgetExistsAsync(Guid budgetId)
         {
-            throw new NotImplementedException();
+            using var session = this.DocumentStore.LightweightSession();
+
+            var exists = await
+                session
+                    .Query<ConceptBudgetDocument>()
+                    .AnyAsync(b => b.Id == budgetId);
+
+            return exists;
         }
     }
 }
