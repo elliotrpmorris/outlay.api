@@ -12,6 +12,18 @@ namespace Outlay.Domain.Data.User
     /// </summary>
     public interface IUserReader
     {
+        /// <summary>
+        /// Gets a user by identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>The user.</returns>
         public Task<User> GetUserByIdAsync(Guid userId);
+
+        /// <summary>
+        /// Checks if a user exists or not.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>Whether the user exists or not.</returns>
+        public Task<bool> GetUserExistsAsync(Guid userId);
     }
 }

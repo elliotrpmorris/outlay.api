@@ -12,6 +12,8 @@
     <Folder Include="Command\User\" />
     <Folder Include="Command\Budget\" />
     <Folder Include="Command\User\Create\" />
+    <Folder Include="Command\Budget\Create\" />
+    <Folder Include="Command\Budget\Update\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">

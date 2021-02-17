@@ -4,7 +4,9 @@
 
 namespace Outlay.API.Controllers.Query.UserRoot
 {
+    using System;
     using GraphQL.Types;
+    using Outlay.API.Controllers.Query.UserRoot.ConceptBudgetRoot;
     using Outlay.API.Controllers.Query.UserRoot.Types;
     using Outlay.Domain.Data.Budget;
     using Outlay.Domain.Data.User;
@@ -13,7 +15,7 @@ namespace Outlay.API.Controllers.Query.UserRoot
     {
         public UserQuery(
             IUserReader userReader,
-            IBudgetReader<Budget> budgetReader)
+            IBudgetReader budgetReader)
         {
             this.Field<UserType, User?>()
                 .Name("info")
@@ -26,6 +28,17 @@ namespace Outlay.API.Controllers.Query.UserRoot
                 .Description("Users budget")
                 .ResolveAsync(context => budgetReader.GetBudgetByUserIdAsync(
                     context.Source.UserId));
+
+            this.Field<ConceptBudgetQuery>()
+                .Name("conceptBudget")
+                .Description("Displays concept budget information")
+                .Argument<NonNullGraphType<StringGraphType>>("budgetId", "The budget identifier.")
+                .Resolve(context =>
+                {
+                    return new ConceptBudgetQueryContext(
+                        context.Source.UserId,
+                        context.GetArgument<Guid>("budgetId"));
+                });
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Outlay.API
     using Outlay.Api.Controllers.Query;
     using Outlay.Api.Controllers.Query.DataLoaders;
     using Outlay.API.Controllers.Query.UserRoot;
+    using Outlay.API.Controllers.Query.UserRoot.ConceptBudgetRoot;
     using Outlay.API.Controllers.Query.UserRoot.Types;
 
     /// <summary>
@@ -66,11 +67,13 @@ namespace Outlay.API
             // Register Queries, Data loaders and Types
             // (Can this be done better im sure it can!)
             services.AddScoped<UserQuery>();
+            services.AddScoped<ConceptBudgetQuery>();
 
             services.AddScoped<UserDataLoader>();
 
             services.AddScoped<UserType>();
             services.AddScoped<BudgetType>();
+            services.AddScoped<ConceptBudgetType>();
 
             return services;
         }

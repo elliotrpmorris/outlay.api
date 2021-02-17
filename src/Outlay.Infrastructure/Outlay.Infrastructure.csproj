@@ -17,6 +17,7 @@
     <Folder Include="Document\User\" />
     <Folder Include="Marten\Seed\" />
     <Folder Include="Document\Budget\" />
+    <Folder Include="Document\ConceptBudget\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Outlay.Domain\Outlay.Domain.csproj" />
