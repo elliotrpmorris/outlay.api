@@ -22,7 +22,8 @@ namespace Outlay.Infrastructure.Marten.Seed
             UserDocuments =
         {
             new UserDocument(
-                Guid.Parse("3f169b60-3d10-4beb-b6f9-3bfe2e4e5526")),
+                Guid.Parse("3f169b60-3d10-4beb-b6f9-3bfe2e4e5526"),
+                "elliot"),
         };
 
         /// <summary>

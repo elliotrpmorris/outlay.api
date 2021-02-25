@@ -80,5 +80,19 @@ namespace Outlay.Infrastructure.Marten
 
             return exists;
         }
+
+        /// <inheritdoc/>
+        public async Task<bool> GetUserExistsAsync(string userName)
+        {
+            using var session = this.DocumentStore.LightweightSession();
+
+            // We want user names to be fully unqiue :D.
+            var exists = await
+                session
+                    .Query<UserDocument>()
+                    .AnyAsync(s => s.UserName.ToLower() == userName.ToLower());
+
+            return exists;
+        }
     }
 }

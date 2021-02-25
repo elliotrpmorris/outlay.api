@@ -15,9 +15,9 @@ namespace Outlay.Domain.Command.User.Create
         /// <inheritdoc/>
         public override void ConfigureRules()
         {
-            this.RuleFor(x => x.Id)
+            this.RuleFor(x => x.UserName)
                 .NotEmpty()
-                .WithMessage("A valid user ID must be provided");
+                .WithMessage("A valid user name must be provided");
         }
     }
 }

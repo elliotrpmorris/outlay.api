@@ -13,11 +13,11 @@ namespace Outlay.Domain.Command.User.Create
     [CommandName("USER/CREATE")]
     public class CreateUser : ICommand
     {
-        public CreateUser(Guid id)
+        public CreateUser(string username)
         {
-            this.Id = id;
+            this.UserName = username;
         }
 
-        public Guid Id { get; }
+        public string UserName { get; }
     }
 }

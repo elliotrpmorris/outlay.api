@@ -27,7 +27,8 @@ namespace Outlay.Infrastructure.Document.User
             }
 
             return new User(
-                user.Id);
+                user.Id,
+                user.UserName);
         }
 
         /// <summary>
@@ -43,7 +44,8 @@ namespace Outlay.Infrastructure.Document.User
             }
 
             return new UserDocument(
-                    user.Id);
+                    user.Id,
+                    user.UserName);
         }
 
         /// <summary>
@@ -54,7 +56,8 @@ namespace Outlay.Infrastructure.Document.User
         public static IQueryable<User> ToUser(this IQueryable<UserDocument> source)
         {
             return source.Select(u => new User(
-                u.Id));
+                u.Id,
+                u.UserName));
         }
     }
 }

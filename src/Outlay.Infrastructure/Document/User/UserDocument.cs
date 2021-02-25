@@ -12,16 +12,25 @@ namespace Outlay.Infrastructure.Document.User
     public class UserDocument
     {
         public UserDocument(
-           Guid id)
+             Guid id,
+             string userName)
         {
             if (id == default)
             {
                 throw new ArgumentException("Invalid user ID.");
             }
 
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                throw new ArgumentException("Invalid user name.");
+            }
+
             this.Id = id;
+            this.UserName = userName;
         }
 
         public Guid Id { get; }
+
+        public string UserName { get; }
     }
 }

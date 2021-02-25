@@ -25,5 +25,12 @@ namespace Outlay.Domain.Data.User
         /// <param name="userId">The user identifier.</param>
         /// <returns>Whether the user exists or not.</returns>
         public Task<bool> GetUserExistsAsync(Guid userId);
+
+        /// <summary>
+        /// Checks if a user exists or not.
+        /// </summary>
+        /// <param name="userName">The user name.</param>
+        /// <returns>Whether the user exists or not.</returns>
+        public Task<bool> GetUserExistsAsync(string userName);
     }
 }

@@ -4,6 +4,7 @@
 
 namespace Outlay.Domain.Command.User.Create
 {
+    using System;
     using System.Threading.Tasks;
     using Chest.Core.Command;
     using Chest.Core.Exceptions;
@@ -32,16 +33,16 @@ namespace Outlay.Domain.Command.User.Create
         /// <inheritdoc/>
         public async Task Handle(CreateUser command, CommandMetadata metadata)
         {
-            if (command.Id == default)
+            if (string.IsNullOrWhiteSpace(command.UserName))
             {
                 throw new InvalidCommandException(
                     metadata.CommandName,
                     typeof(CreateUser).Name,
-                    $"ID must be set on the command.");
+                    $"User name must be set on the command.");
             }
 
             var exists = await
-               this.UserReader.GetUserExistsAsync(command.Id);
+               this.UserReader.GetUserExistsAsync(command.UserName);
 
             if (exists)
             {
@@ -51,7 +52,9 @@ namespace Outlay.Domain.Command.User.Create
                   $"User already exists.");
             }
 
-            await this.UserWriter.AddAsync(new User(command.Id));
+            await this.UserWriter.AddAsync(new User(
+                Guid.NewGuid(),
+                command.UserName));
         }
     }
 }
